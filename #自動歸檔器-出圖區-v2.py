@@ -16,6 +16,7 @@ _Pt_fider = str(Pt_fider) + '/'  #讓他可使用在os函數
 ck_dirs_lonth =len(str(Pt_fider)) - len(str(Tg_dirs)) 
 _ck_dirs = str(Pt_fider)[ck_dirs_lonth:]
 
+
 if Tg_dirs in _ck_dirs :
   for root,dirs,files in walk(Pt_fider): #執行此路徑內所有檔案
     for i in files:
