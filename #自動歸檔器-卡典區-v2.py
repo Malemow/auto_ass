@@ -8,16 +8,16 @@ from os.path import join
 int_path  = 0 #檢測已丟幾個檔案
 int_error = 0 #檢測需幾個檔案移除ㄈ
 
-Tg_dirs = str('##卡典集散地')
+Tg_dirs = str('##卡典集散地') #定義要檢查的上個資料夾名稱
 
 Pt_Print  = pathlib.Path(__file__) #抓取執行檔檔案資料
 Pt_fider  = Pt_Print.parent #抓取執行檔父資料夾
 _Pt_fider = str(Pt_fider) + '/'  #讓他可使用在os函數
-ck_dirs_lonth =len(str(Pt_fider)) - len(str(Tg_dirs)) 
-_ck_dirs = str(Pt_fider)[ck_dirs_lonth:]
+ck_dirs_lonth =len(str(Pt_fider)) - len(str(Tg_dirs)) #抓取字串幾碼
+_ck_dirs = str(Pt_fider)[ck_dirs_lonth:] #只抓取路徑中父資料夾名稱
 
 
-if Tg_dirs in _ck_dirs :
+if Tg_dirs in _ck_dirs : #檢查此執行檔的父資料夾是否與Tg_dirs一樣
   for root,dirs,files in walk(Pt_fider): #執行此路徑內所有檔案
     for i in files:
       pt_fider  = join(root , i) #獲取檔案路徑
