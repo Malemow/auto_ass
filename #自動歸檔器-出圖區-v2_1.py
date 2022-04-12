@@ -10,9 +10,9 @@ int_error = 0 #檢測需幾個檔案移除ㄈ
 
 Tg_dirs = str('##圖檔集散地') #定義要檢查的上個資料夾名稱
 
-Pt_Print  = pathlib.Path(__file__) #抓取執行檔檔案資料
-Pt_fider  = Pt_Print.parent #抓取執行檔父資料夾
-_Pt_fider = str(Pt_fider) + '/'  #讓他可使用在os函數
+Pt_Print  = str(__file__) #抓取執行檔名稱
+Pt_fider  = os.path.split(os.path.abspath(__file__))[0] #抓取執行檔父資料夾
+_Pt_fider = Pt_fider + '/'  #讓他可使用在os函數
 ck_dirs_lonth =len(str(Pt_fider)) - len(str(Tg_dirs)) #抓取字串幾碼
 _ck_dirs = str(Pt_fider)[ck_dirs_lonth:] #只抓取路徑中父資料夾名稱
 
@@ -40,9 +40,10 @@ if Tg_dirs in _ck_dirs : #檢查此執行檔的父資料夾是否與Tg_dirs一�
           os.mkdir(_Pt_fider + '../' + dir_yers + '年')
         if not os.path.exists(_Pt_fider + '../' + dir_yers + '年/' + dir_mon + '月'): #辨識此目錄是否有此月份
           os.mkdir(_Pt_fider + '../' + dir_yers + '年/' + dir_mon + '月')     
-        if not os.path.exists(_Pt_fider + dir_yers + '年/' + dir_mon + '月/' + dir_name): #辨識此目錄是否有此單號資料夾
+        if not os.path.exists(_Pt_fider + '../' + dir_yers + '年/' + dir_mon + '月/' + dir_name): #辨識此目錄是否有此單號資料夾
           os.mkdir(_Pt_fider + '../' + dir_yers + '年/' + dir_mon + '月/' + dir_name)
-          shutil.move(pt_fider,_Pt_fider + '../' + dir_yers + '年/' + dir_mon + '月/' + dir_name + '/' + pt_name ) #移動檔案到此單號資料夾
+        shutil.move(pt_fider,_Pt_fider + '../' + dir_yers + '年/' + dir_mon + '月/' + dir_name + '/' + pt_name ) #移動檔案到此單號資料夾
+         
 
         print ('成功將', pt_name , '移動至', dir_yers , '年' ,dir_mon , '月資料夾')
         int_path = int_path + 1
@@ -54,4 +55,4 @@ if Tg_dirs in _ck_dirs : #檢查此執行檔的父資料夾是否與Tg_dirs一�
   print("有"+ str(int_path)  +"個檔案已處理")
   print("有"+ str(int_error) +"個檔案需移除")
 else:
-  print('檔案錯誤,請丟進指定資料夾')
+  print('請丟進指定資料夾')
